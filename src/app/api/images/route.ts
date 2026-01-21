@@ -184,9 +184,11 @@ async function fetchChainImage(chainId: number): Promise<string | null> {
 
     const platform = platformsCache.find((p) => p.chain_identifier === chainId);
     if (platform?.image?.small || platform?.image?.thumb) {
-      const imageUrl = platform.image.small || platform.image.thumb;
-      chainImageCache.set(chainId, imageUrl);
-      return imageUrl;
+      const imageUrl = platform.image.small ?? platform.image.thumb ?? null;
+      if (imageUrl) {
+        chainImageCache.set(chainId, imageUrl);
+        return imageUrl;
+      }
     }
   } catch (error) {
     console.error(`Failed to fetch image for chain ${chainId}:`, error);
