@@ -1,0 +1,655 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Stargate dark foundation - RGB(20, 20, 20) */
+  --void: #141414;
+  --surface-0: #181818;
+  --surface-1: #1c1c1c;
+  --surface-2: #222222;
+  --surface-3: #2a2a2a;
+
+  /* Neutral gray palette */
+  --gray-50: #f5f5f5;
+  --gray-100: #e5e5e5;
+  --gray-200: #d4d4d4;
+  --gray-300: #a3a3a3;
+  --gray-400: #737373;
+  --gray-500: #525252;
+  --gray-600: #404040;
+  --gray-700: #262626;
+
+  /* Stargate teal accent - HSL(163, 85%, 39%) */
+  --stargate: #0fb37c;
+  --stargate-dim: #0a8c60;
+  --stargate-glow: rgba(15, 179, 124, 0.15);
+  --stargate-subtle: rgba(15, 179, 124, 0.08);
+
+  /* Semantic */
+  --text-primary: #ffffff;
+  --text-secondary: #d4d4d4;
+  --text-tertiary: #a3a3a3;
+  --text-muted: #737373;
+  --border: var(--gray-700);
+  --border-subtle: #1f1f1f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--void);
+  color: var(--text-primary);
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+}
+
+/* Constellation / Night Sky Background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    /* Subtle radial glow from center-top */
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(15, 179, 124, 0.03) 0%, transparent 50%),
+    /* Base void */
+    var(--void);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Stars layer - using SVG for 1000+ stars */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'%3E%3Cdefs%3E%3CradialGradient id='s'%3E%3Cstop offset='0%25' stop-color='white'/%3E%3Cstop offset='100%25' stop-color='transparent'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='transparent' width='1000' height='1000'/%3E%3Ccircle cx='23' cy='15' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='89' cy='42' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='156' cy='8' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='234' cy='67' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='312' cy='23' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='378' cy='89' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='445' cy='34' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='523' cy='56' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='589' cy='12' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='667' cy='78' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='734' cy='45' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='812' cy='23' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='878' cy='67' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='945' cy='34' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='45' cy='123' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='112' cy='156' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='189' cy='134' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='256' cy='178' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='334' cy='112' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='401' cy='189' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='478' cy='145' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='545' cy='167' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='623' cy='123' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='689' cy='189' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='767' cy='134' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='834' cy='156' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='912' cy='178' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='978' cy='112' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='67' cy='234' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='134' cy='267' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='212' cy='223' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='278' cy='289' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='356' cy='245' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='423' cy='278' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='501' cy='234' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='567' cy='256' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='645' cy='289' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='712' cy='223' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='789' cy='267' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='856' cy='245' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='934' cy='278' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='12' cy='345' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='89' cy='378' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='156' cy='312' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='234' cy='389' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='301' cy='334' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='378' cy='367' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='456' cy='312' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='523' cy='389' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='601' cy='345' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='667' cy='378' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='745' cy='334' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='812' cy='367' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='889' cy='312' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='956' cy='389' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='34' cy='456' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='112' cy='423' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='178' cy='489' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='256' cy='445' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='323' cy='478' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='401' cy='434' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='478' cy='467' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='545' cy='423' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='623' cy='489' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='689' cy='445' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='767' cy='478' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='834' cy='434' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='912' cy='467' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='978' cy='423' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='56' cy='534' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='134' cy='567' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='201' cy='512' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='278' cy='589' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='345' cy='545' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='423' cy='578' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='501' cy='534' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='567' cy='567' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='645' cy='512' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='712' cy='589' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='789' cy='545' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='856' cy='578' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='934' cy='534' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='23' cy='645' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='89' cy='612' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='167' cy='678' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='234' cy='634' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='312' cy='667' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='378' cy='623' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='456' cy='689' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='523' cy='645' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='601' cy='678' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='667' cy='634' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='745' cy='667' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='812' cy='623' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='889' cy='689' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='956' cy='645' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='45' cy='756' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='112' cy='723' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='189' cy='789' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='256' cy='745' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='334' cy='778' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='401' cy='734' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='478' cy='767' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='545' cy='723' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='623' cy='789' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='689' cy='745' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='767' cy='778' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='834' cy='734' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='912' cy='767' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='978' cy='723' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='67' cy='856' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='134' cy='889' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='212' cy='834' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='278' cy='867' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='356' cy='912' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='423' cy='856' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='501' cy='889' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='567' cy='834' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='645' cy='867' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='712' cy='912' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='789' cy='856' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='856' cy='889' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='934' cy='834' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='12' cy='945' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='89' cy='978' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='156' cy='934' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='234' cy='967' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='301' cy='912' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='378' cy='945' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='456' cy='978' r='1.2' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='523' cy='934' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='601' cy='967' r='1.1' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='667' cy='912' r='1.3' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='745' cy='945' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='812' cy='978' r='1.2' fill='rgba(255,255,255,0.85)'/%3E%3Ccircle cx='889' cy='934' r='1.1' fill='rgba(255,255,255,0.9)'/%3E%3Ccircle cx='956' cy='967' r='1.0' fill='rgba(255,255,255,0.8)'/%3E%3Ccircle cx='8' cy='67' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='35' cy='89' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='62' cy='34' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='98' cy='78' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='125' cy='23' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='152' cy='56' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='188' cy='12' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='215' cy='45' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='242' cy='89' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='278' cy='34' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='305' cy='67' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='332' cy='23' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='368' cy='78' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='395' cy='45' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='422' cy='12' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='458' cy='56' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='485' cy='89' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='512' cy='34' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='548' cy='67' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='575' cy='23' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='602' cy='78' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='638' cy='45' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='665' cy='12' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='692' cy='56' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='728' cy='89' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='755' cy='34' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='782' cy='67' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='818' cy='23' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='845' cy='78' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='872' cy='45' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='908' cy='12' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='935' cy='56' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='962' cy='89' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='998' cy='34' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='15' cy='112' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='42' cy='145' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='78' cy='178' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='105' cy='123' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='132' cy='156' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='168' cy='189' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='195' cy='134' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='222' cy='167' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='258' cy='112' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='285' cy='145' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='312' cy='178' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='348' cy='123' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='375' cy='156' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='402' cy='189' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='438' cy='134' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='465' cy='167' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='492' cy='112' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='528' cy='145' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='555' cy='178' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='582' cy='123' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='618' cy='156' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='645' cy='189' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='672' cy='134' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='708' cy='167' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='735' cy='112' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='762' cy='145' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='798' cy='178' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='825' cy='123' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='852' cy='156' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='888' cy='189' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='915' cy='134' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='942' cy='167' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='978' cy='112' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='5' cy='223' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='32' cy='256' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='68' cy='289' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='95' cy='234' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='122' cy='267' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='158' cy='212' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='185' cy='245' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='212' cy='278' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='248' cy='223' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='275' cy='256' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='302' cy='289' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='338' cy='234' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='365' cy='267' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='392' cy='212' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='428' cy='245' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='455' cy='278' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='482' cy='223' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='518' cy='256' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='545' cy='289' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='572' cy='234' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='608' cy='267' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='635' cy='212' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='662' cy='245' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='698' cy='278' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='725' cy='223' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='752' cy='256' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='788' cy='289' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='815' cy='234' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='842' cy='267' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='878' cy='212' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='905' cy='245' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='932' cy='278' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='968' cy='223' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='995' cy='256' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='22' cy='334' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='58' cy='367' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='85' cy='312' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='112' cy='389' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='148' cy='345' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='175' cy='378' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='202' cy='323' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='238' cy='356' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='265' cy='389' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='292' cy='334' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='328' cy='367' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='355' cy='312' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='382' cy='345' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='418' cy='378' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='445' cy='323' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='472' cy='356' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='508' cy='389' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='535' cy='334' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='562' cy='367' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='598' cy='312' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='625' cy='345' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='652' cy='378' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='688' cy='323' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='715' cy='356' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='742' cy='389' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='778' cy='334' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='805' cy='367' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='832' cy='312' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='868' cy='345' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='895' cy='378' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='922' cy='323' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='958' cy='356' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='985' cy='389' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='12' cy='445' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='48' cy='478' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='75' cy='423' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='102' cy='456' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='138' cy='489' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='165' cy='434' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='192' cy='467' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='228' cy='412' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='255' cy='445' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='282' cy='478' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='318' cy='423' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='345' cy='456' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='372' cy='489' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='408' cy='434' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='435' cy='467' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='462' cy='412' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='498' cy='445' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='525' cy='478' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='552' cy='423' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='588' cy='456' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='615' cy='489' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='642' cy='434' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='678' cy='467' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='705' cy='412' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='732' cy='445' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='768' cy='478' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='795' cy='423' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='822' cy='456' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='858' cy='489' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='885' cy='434' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='912' cy='467' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='948' cy='412' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='975' cy='445' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='2' cy='534' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='38' cy='567' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='65' cy='512' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='92' cy='545' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='128' cy='578' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='155' cy='523' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='182' cy='556' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='218' cy='589' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='245' cy='534' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='272' cy='567' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='308' cy='512' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='335' cy='545' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='362' cy='578' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='398' cy='523' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='425' cy='556' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='452' cy='589' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='488' cy='534' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='515' cy='567' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='542' cy='512' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='578' cy='545' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='605' cy='578' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='632' cy='523' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='668' cy='556' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='695' cy='589' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='722' cy='534' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='758' cy='567' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='785' cy='512' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='812' cy='545' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='848' cy='578' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='875' cy='523' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='902' cy='556' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='938' cy='589' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='965' cy='534' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='992' cy='567' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='28' cy='645' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='55' cy='678' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='82' cy='623' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='118' cy='656' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='145' cy='689' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='172' cy='634' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='208' cy='667' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='235' cy='612' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='262' cy='645' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='298' cy='678' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='325' cy='623' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='352' cy='656' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='388' cy='689' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='415' cy='634' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='442' cy='667' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='478' cy='612' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='505' cy='645' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='532' cy='678' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='568' cy='623' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='595' cy='656' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='622' cy='689' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='658' cy='634' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='685' cy='667' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='712' cy='612' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='748' cy='645' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='775' cy='678' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='802' cy='623' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='838' cy='656' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='865' cy='689' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='892' cy='634' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='928' cy='667' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='955' cy='612' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='982' cy='645' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='18' cy='756' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='45' cy='789' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='72' cy='734' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='108' cy='767' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='135' cy='712' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='162' cy='745' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='198' cy='778' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='225' cy='723' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='252' cy='756' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='288' cy='789' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='315' cy='734' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='342' cy='767' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='378' cy='712' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='405' cy='745' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='432' cy='778' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='468' cy='723' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='495' cy='756' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='522' cy='789' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='558' cy='734' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='585' cy='767' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='612' cy='712' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='648' cy='745' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='675' cy='778' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='702' cy='723' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='738' cy='756' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='765' cy='789' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='792' cy='734' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='828' cy='767' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='855' cy='712' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='882' cy='745' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='918' cy='778' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='945' cy='723' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='972' cy='756' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='8' cy='867' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='35' cy='834' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='62' cy='889' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='98' cy='856' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='125' cy='812' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='152' cy='867' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='188' cy='834' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='215' cy='889' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='242' cy='856' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='278' cy='812' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='305' cy='867' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='332' cy='834' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='368' cy='889' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='395' cy='856' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='422' cy='812' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='458' cy='867' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='485' cy='834' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='512' cy='889' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='548' cy='856' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='575' cy='812' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='602' cy='867' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='638' cy='834' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='665' cy='889' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='692' cy='856' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='728' cy='812' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='755' cy='867' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='782' cy='834' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='818' cy='889' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='845' cy='856' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='872' cy='812' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='908' cy='867' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='935' cy='834' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='962' cy='889' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='998' cy='856' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='25' cy='945' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='52' cy='912' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='88' cy='978' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='115' cy='934' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='142' cy='967' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='178' cy='923' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='205' cy='956' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='232' cy='989' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='268' cy='945' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='295' cy='912' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='322' cy='978' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='358' cy='934' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='385' cy='967' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='412' cy='923' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='448' cy='956' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='475' cy='989' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='502' cy='945' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='538' cy='912' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='565' cy='978' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='592' cy='934' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='628' cy='967' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='655' cy='923' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='682' cy='956' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='718' cy='989' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='745' cy='945' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='772' cy='912' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='808' cy='978' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='835' cy='934' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='862' cy='967' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='898' cy='923' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='925' cy='956' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='952' cy='989' r='0.7' fill='rgba(220,220,220,0.7)'/%3E%3Ccircle cx='988' cy='945' r='0.6' fill='rgba(220,220,220,0.65)'/%3E%3Ccircle cx='4' cy='5' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='14' cy='12' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='24' cy='3' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='34' cy='18' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='44' cy='8' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='54' cy='22' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='64' cy='15' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='74' cy='6' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='84' cy='25' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='94' cy='11' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='104' cy='19' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='114' cy='4' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='124' cy='28' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='134' cy='9' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='144' cy='21' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='154' cy='14' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='164' cy='7' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='174' cy='24' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='184' cy='16' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='194' cy='2' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='204' cy='27' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='214' cy='10' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='224' cy='20' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='234' cy='13' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='244' cy='1' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='254' cy='23' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='264' cy='17' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='274' cy='8' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='284' cy='26' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='294' cy='5' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='304' cy='29' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='314' cy='12' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='324' cy='22' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='334' cy='15' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='344' cy='6' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='354' cy='25' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='364' cy='18' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='374' cy='3' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='384' cy='28' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='394' cy='11' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='404' cy='19' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='414' cy='4' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='424' cy='24' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='434' cy='9' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='444' cy='21' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='454' cy='14' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='464' cy='7' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='474' cy='27' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='484' cy='16' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='494' cy='2' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='504' cy='23' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='514' cy='10' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='524' cy='20' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='534' cy='13' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='544' cy='1' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='554' cy='26' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='564' cy='17' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='574' cy='8' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='584' cy='29' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='594' cy='5' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='604' cy='22' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='614' cy='12' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='624' cy='25' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='634' cy='15' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='644' cy='6' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='654' cy='28' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='664' cy='18' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='674' cy='3' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='684' cy='24' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='694' cy='11' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='704' cy='19' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='714' cy='4' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='724' cy='27' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='734' cy='9' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='744' cy='21' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='754' cy='14' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='764' cy='7' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='774' cy='23' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='784' cy='16' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='794' cy='2' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='804' cy='26' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='814' cy='10' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='824' cy='20' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='834' cy='13' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='844' cy='1' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='854' cy='29' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='864' cy='17' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='874' cy='8' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='884' cy='25' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='894' cy='5' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='904' cy='22' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='914' cy='12' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='924' cy='28' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='934' cy='15' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='944' cy='6' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='954' cy='24' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='964' cy='18' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='974' cy='3' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3Ccircle cx='984' cy='27' r='0.4' fill='rgba(180,180,180,0.5)'/%3E%3Ccircle cx='994' cy='11' r='0.35' fill='rgba(180,180,180,0.45)'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Twinkling animation */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.3; }
+}
+
+body::after {
+  animation: twinkle 8s ease-in-out infinite;
+}
+
+/* Content layer */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Headings - Geist for clean modern look */
+h1, h2, h3, .heading {
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Monospace for data/code - Geist Mono */
+.mono, code, pre {
+  font-family: 'Geist Mono', monospace;
+}
+
+/* Custom scrollbar - nearly invisible */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-600);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-500);
+}
+
+/* Selection */
+::selection {
+  background: var(--stargate-glow);
+  color: var(--gray-50);
+}
+
+/* ============================================
+   LAYOUT PRIMITIVES
+   ============================================ */
+
+.container-narrow {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Zen line - extends beyond container */
+.zen-line {
+  position: relative;
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 48px 0;
+}
+
+.zen-line::before,
+.zen-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 1px;
+  width: 40px;
+  background: linear-gradient(to right, var(--border-subtle), transparent);
+}
+
+.zen-line::before {
+  right: 100%;
+}
+
+.zen-line::after {
+  left: 100%;
+  background: linear-gradient(to left, var(--border-subtle), transparent);
+}
+
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+
+.label {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  margin-bottom: 10px;
+}
+
+.input-field {
+  width: 100%;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  padding: 14px 16px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field::placeholder {
+  color: var(--text-muted);
+}
+
+.input-field:hover {
+  border-color: var(--border);
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--stargate-dim);
+  box-shadow: 0 0 0 1px var(--stargate-dim);
+}
+
+/* ============================================
+   SELECTOR / DROPDOWN - Stargate Style
+   ============================================ */
+
+.selector {
+  position: relative;
+  z-index: 10;
+}
+
+.selector:has(.selector-menu) {
+  z-index: 100;
+}
+
+.selector-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.selector-trigger:hover {
+  border-color: var(--gray-600);
+  background: var(--surface-2);
+}
+
+.selector-trigger.open {
+  border-color: var(--gray-600);
+  background: var(--surface-2);
+}
+
+.selector-trigger.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.selector-trigger.disabled:hover {
+  border-color: var(--border-subtle);
+  background: var(--surface-1);
+}
+
+.selector-trigger .placeholder {
+  color: var(--text-muted);
+}
+
+.selector-trigger .chevron {
+  width: 20px;
+  height: 20px;
+  color: var(--text-tertiary);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.selector-trigger.open .chevron {
+  transform: rotate(180deg);
+}
+
+/* Token/Chain display in trigger */
+.selector-trigger .token-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.selector-trigger .token-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-3);
+  border: 2px solid var(--gray-600);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.selector-trigger .token-icon .chain-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1.5px solid var(--gray-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: 600;
+}
+
+.selector-trigger .token-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.selector-trigger .token-name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+.selector-trigger .token-chain {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.selector-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--surface-1);
+  border: 1px solid var(--gray-600);
+  border-radius: 16px;
+  max-height: 400px;
+  overflow: hidden;
+  z-index: 1000;
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    0 16px 32px rgba(0, 0, 0, 0.5);
+}
+
+.selector-search {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.selector-search input {
+  width: 100%;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  transition: border-color 0.15s ease;
+}
+
+.selector-search input:focus {
+  outline: none;
+  border-color: var(--gray-600);
+}
+
+.selector-search input::placeholder {
+  color: var(--text-muted);
+}
+
+.selector-list {
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.selector-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+
+.selector-option:hover {
+  background: var(--surface-2);
+}
+
+.selector-option.selected {
+  background: var(--stargate-subtle);
+}
+
+.selector-option .icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-3);
+  border: 1.5px solid var(--gray-600);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.selector-option .details {
+  flex: 1;
+  min-width: 0;
+}
+
+.selector-option .name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.selector-option .meta {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 1px;
+}
+
+.selector-option .badge {
+  font-size: 10px;
+  padding: 4px 10px;
+  background: var(--surface-2);
+  border-radius: 8px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.selector-empty {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ============================================
+   CARDS & PANELS - Stargate Style
+   ============================================ */
+
+.panel {
+  background: var(--surface-0);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+}
+
+.panel-padded {
+  padding: 24px;
+}
+
+/* ============================================
+   ROUTE CARDS - Stargate Style
+   ============================================ */
+
+.route-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  transition: all 0.15s ease;
+}
+
+.route-item:hover {
+  background: var(--surface-2);
+  border-color: var(--gray-600);
+}
+
+.route-item .chain-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-3);
+  border: 1.5px solid var(--gray-600);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.route-item .chain-name {
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.route-item .chain-address {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  font-family: 'Geist Mono', monospace;
+}
+
+.route-item .chain-id {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-family: 'Geist Mono', monospace;
+}
+
+/* ============================================
+   BADGES & TAGS - Stargate Style
+   ============================================ */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.tag-default {
+  background: var(--surface-2);
+  color: var(--text-secondary);
+}
+
+.tag-stargate {
+  background: var(--stargate-subtle);
+  color: var(--stargate);
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+@keyframes shimmer {
+  0% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.5; }
+}
+
+.skeleton {
+  background: var(--surface-2);
+  border-radius: 14px;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInSlow {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.fade-in-slow {
+  animation: fadeInSlow 0.6s ease forwards;
+}
+
+/* Staggered children - slower, more deliberate */
+.stagger > * {
+  opacity: 0;
+  animation: fadeIn 0.35s ease forwards;
+}
+
+.stagger > *:nth-child(1) { animation-delay: 0.03s; }
+.stagger > *:nth-child(2) { animation-delay: 0.06s; }
+.stagger > *:nth-child(3) { animation-delay: 0.09s; }
+.stagger > *:nth-child(4) { animation-delay: 0.12s; }
+.stagger > *:nth-child(5) { animation-delay: 0.15s; }
+.stagger > *:nth-child(6) { animation-delay: 0.18s; }
+.stagger > *:nth-child(7) { animation-delay: 0.21s; }
+.stagger > *:nth-child(8) { animation-delay: 0.24s; }
+.stagger > *:nth-child(9) { animation-delay: 0.27s; }
+.stagger > *:nth-child(10) { animation-delay: 0.30s; }
+.stagger > *:nth-child(n+11) { animation-delay: 0.33s; }
+
+/* ============================================
+   EMPTY STATES
+   ============================================ */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  background: var(--surface-1);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+}
+
+.empty-state .icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 16px;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.empty-state p {
+  color: var(--text-tertiary);
+  font-size: 13px;
+  max-width: 280px;
+  line-height: 1.6;
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+.text-stargate {
+  color: var(--stargate);
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
